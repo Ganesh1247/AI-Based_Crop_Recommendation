@@ -171,7 +171,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
     return {
       overall_score,
       recommendations: recommendations.length > 0 ? recommendations : ['Your soil is in good condition'],
-      suitable_crops: [...new Set(suitable_crops)], // Remove duplicates
+      suitable_crops: Array.from(new Set(suitable_crops)), // Remove duplicates
       ph_status,
       nutrient_levels: {
         nitrogen: nitrogen_status,
