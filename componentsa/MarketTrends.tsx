@@ -176,7 +176,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
         title: 'Tomato Supply Glut Affects Pricing',
         description: 'Bumper harvest in major producing regions has led to oversupply, causing price decline.',
         impact: 'Negative',
-        category: 'Supply'
+        category: 'Price'
       },
       {
         title: 'Government Announces MSP Increase',
