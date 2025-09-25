@@ -194,7 +194,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
         title: 'Onion Storage Crisis Drives Prices Up',
         description: 'Storage infrastructure shortage in key producing areas has reduced supply availability.',
         impact: 'Positive',
-        category: 'Supply'
+        category: 'Price'
       }
     ];
 
