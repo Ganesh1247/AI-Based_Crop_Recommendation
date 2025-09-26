@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 // For demo purposes, we'll use placeholder values
 // In production, replace these with your actual Supabase credentials
-const supabaseUrl = import.meta.env?.VITE_SUPABASE_URL || 'https://your-project.supabase.co'
-const supabaseKey = import.meta.env?.VITE_SUPABASE_ANON_KEY || 'your-supabase-anon-key'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-project.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-supabase-anon-key'
 
 export const supabase = createClient(supabaseUrl, supabaseKey)
 

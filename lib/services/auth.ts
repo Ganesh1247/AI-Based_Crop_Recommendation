@@ -29,7 +29,7 @@ const generateVerificationCode = (): string => {
 // Clean up expired OTPs
 const cleanupExpiredOTPs = () => {
   const now = Date.now();
-  for (const [phone, data] of otpStore.entries()) {
+  for (const [phone, data] of Array.from(otpStore.entries())) {
     if (data.expires < now) {
       otpStore.delete(phone);
       console.log(`🧹 Cleaned up expired OTP for ${phone}`);

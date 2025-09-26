@@ -40,7 +40,7 @@ export interface WeatherResponse {
 }
 
 // OpenWeatherMap API (free tier) and One Call API for monthly data
-const WEATHER_API_KEY = import.meta.env?.VITE_WEATHER_API_KEY || 'demo-key';
+const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || 'demo-key';
 const WEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const ONECALL_URL = 'https://api.openweathermap.org/data/3.0/onecall';
 
