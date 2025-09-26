@@ -25,7 +25,7 @@ export interface MLResponse {
 }
 
 // Crop database with optimal growing conditions
-const CROP_DATABASE = {
+export const CROP_DATABASE = {
   'Rice': {
     optimal: { nitrogen: [20, 40], phosphorus: [10, 25], potassium: [15, 30], ph: [5.5, 6.5] },
     season: 'monsoon',

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Brain, Edit3, Leaf, Zap, TrendingUp, Droplets, Beaker, MapPin, Satellite } from "lucide-react";
+import { ArrowLeft, Brain, Edit3, Leaf, Zap, TrendingUp, Droplets, Beaker, MapPin, Satellite, Copy, Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -7,9 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Badge } from "./ui/badge";
 import { Progress } from "./ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { getCurrentLocation, searchLocation } from "../lib/services/location";
 import { getSoilData } from "../lib/services/soilgrid";
-import { predictCropManual, predictCropAI } from "../lib/services/ml-model";
+import { predictCropManual, predictCropAI, CROP_DATABASE } from "../lib/services/ml-model";
 import type { LocationData } from "../lib/services/location";
 import type { SoilGridData } from "../lib/services/soilgrid";
 import type { PredictionResult } from "../lib/services/ml-model";
@@ -37,6 +38,75 @@ export function CropPredict({ onBack }: CropPredictProps) {
     soilGridsData: null as SoilGridData | null,
     locationInput: ""
   });
+
+  // NPK Predictor state (based on previous crop removal)
+  const [npkForm, setNpkForm] = useState({
+    pastCropType: "Wheat",
+    area: "1",
+    areaUnit: "ha" as "ha" | "m2",
+    yieldValue: "",
+    yieldUnit: "kg_ha" as "kg_ha" | "t_ha",
+  });
+  const [npkResult, setNpkResult] = useState<{ N: number; P: number; K: number; ph: number } | null>(null);
+  const [copied, setCopied] = useState<{ which: "npk" | "all" | "ph" | null }>({ which: null });
+
+  const handleNpkChange = (field: string, value: string) => {
+    setNpkForm(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Nutrient removal coefficients (kg nutrient per ton of harvested yield)
+  const REMOVAL_COEFFICIENTS: Record<string, { N: number; P: number; K: number }> = {
+    Rice: { N: 18, P: 8, K: 20 },
+    Wheat: { N: 22, P: 9, K: 20 },
+    Corn: { N: 25, P: 10, K: 25 },
+    Soybean: { N: 70, P: 15, K: 30 },
+    Cotton: { N: 30, P: 12, K: 35 },
+    Sugarcane: { N: 1.2, P: 0.5, K: 1.8 },
+    Potato: { N: 3.5, P: 1.3, K: 5.5 },
+    Tomato: { N: 3, P: 1.2, K: 4.5 },
+  };
+
+  const convertYieldToTonsPerHa = (): number => {
+    const value = parseFloat(npkForm.yieldValue || "0");
+    if (!value || value <= 0) return 0;
+    return npkForm.yieldUnit === "t_ha" ? value : value / 1000; // kg/ha -> t/ha
+  };
+
+  // Calculate based on previous crop nutrient removal
+  const calculateNpkRecommendation = () => {
+    const yieldTPerHa = convertYieldToTonsPerHa();
+    if (yieldTPerHa <= 0) {
+      setError("Please enter a valid yield value.");
+      return;
+    }
+
+    const coeff = REMOVAL_COEFFICIENTS[npkForm.pastCropType] || { N: 20, P: 8, K: 20 };
+    const removedPerHa = {
+      N: coeff.N * yieldTPerHa,
+      P: coeff.P * yieldTPerHa,
+      K: coeff.K * yieldTPerHa,
+    };
+
+    const efficiency = 0.6; // 60% use efficiency
+    const recommendPerHa = {
+      N: Math.round((removedPerHa.N / efficiency) * 10) / 10,
+      P: Math.round((removedPerHa.P / efficiency) * 10) / 10,
+      K: Math.round((removedPerHa.K / efficiency) * 10) / 10,
+    };
+
+    const cropData: any = (CROP_DATABASE as any)[npkForm.pastCropType as keyof typeof CROP_DATABASE];
+    const ph = cropData ? (cropData.optimal.ph[0] + cropData.optimal.ph[1]) / 2 : 6.5;
+
+    setNpkResult({ ...recommendPerHa, ph: Math.round(ph * 10) / 10 });
+  };
+
+  const copyText = async (text: string, which: "npk" | "ph" | "all") => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied({ which });
+      setTimeout(() => setCopied({ which: null }), 1200);
+    } catch {}
+  };
 
   const handleManualInputChange = (field: string, value: string) => {
     setManualData(prev => ({
@@ -242,7 +312,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
             {/* Prediction Methods */}
             <div className="lg:col-span-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsList className="grid w-full grid-cols-3 mb-6">
                   <TabsTrigger value="manual" className="flex items-center space-x-2">
                     <Edit3 className="w-4 h-4" />
                     <span>Manual Entry</span>
@@ -250,6 +320,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
                   <TabsTrigger value="ai" className="flex items-center space-x-2">
                     <Brain className="w-4 h-4" />
                     <span>AI Prediction</span>
+                  </TabsTrigger>
+                  <TabsTrigger value="npk" className="flex items-center space-x-2">
+                    <Beaker className="w-4 h-4" />
+                    <span>NPK Predictor</span>
                   </TabsTrigger>
                 </TabsList>
 
@@ -514,6 +588,158 @@ export function CropPredict({ onBack }: CropPredictProps) {
                       )}
                     </CardContent>
                   </Card>
+
+                </TabsContent>
+
+                {/* Dedicated NPK tab */}
+                <TabsContent value="npk" className="space-y-6">
+                  {/* NPK Predictor (based on previous crop) */}
+                  {true ? (
+                    <Card className="border-green-100">
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <Beaker className="w-5 h-5 text-green-600" />
+                          <span>NPK Predictor</span>
+                        </CardTitle>
+                        <CardDescription className="text-gray-700">Predict optimal NPK and pH values based on your previous crop data</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid md:grid-cols-3 gap-4">
+                          <div className="space-y-2">
+                            <Label className="text-gray-800">Past Crop Type</Label>
+                            <Select value={npkForm.pastCropType} onValueChange={(v) => handleNpkChange("pastCropType", v)}>
+                              <SelectTrigger className="border-green-200 focus:border-green-500">
+                                <SelectValue placeholder="Select crop" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {Object.keys((CROP_DATABASE as any)).map((c) => (
+                                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-gray-800">Area of Crop</Label>
+                            <div className="grid grid-cols-2 gap-2">
+                              <Input
+                                type="number"
+                                min="0"
+                                value={npkForm.area}
+                                onChange={(e) => handleNpkChange("area", e.target.value)}
+                                className="border-green-200 focus:border-green-500"
+                              />
+                              <Select value={npkForm.areaUnit} onValueChange={(v) => handleNpkChange("areaUnit", v)}>
+                                <SelectTrigger className="border-green-200 focus:border-green-500">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="m2">Square Meters (m²)</SelectItem>
+                                  <SelectItem value="ha">Hectares (ha)</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-gray-800">Yield Obtained</Label>
+                            <div className="grid grid-cols-2 gap-2">
+                              <Input
+                                type="number"
+                                min="0"
+                                value={npkForm.yieldValue}
+                                onChange={(e) => handleNpkChange("yieldValue", e.target.value)}
+                                className="border-green-200 focus:border-green-500"
+                              />
+                              <Select value={npkForm.yieldUnit} onValueChange={(v) => handleNpkChange("yieldUnit", v)}>
+                                <SelectTrigger className="border-green-200 focus:border-green-500">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="kg_ha">Kg per Hectare (kg/ha)</SelectItem>
+                                  <SelectItem value="t_ha">Tons per Hectare (t/ha)</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <Button
+                          type="button"
+                          onClick={calculateNpkRecommendation}
+                          className="w-full bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          Predict NPK Values
+                        </Button>
+
+                        {npkResult && (
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="text-gray-900 font-semibold mb-3">NPK Values (kg/hectare)</h4>
+                                <div className="grid grid-cols-3 gap-3">
+                                  {(["N","P","K"] as const).map(key => (
+                                    <div key={key} className="bg-green-50 border border-green-100 rounded-lg p-4 text-center">
+                                      <div className="text-2xl font-bold text-green-700">{(npkResult as any)[key]}</div>
+                                      <div className="text-xs text-gray-700 mt-1">
+                                        {key === "N" ? "Nitrogen" : key === "P" ? "Phosphorus" : "Potassium"}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                                <p className="text-xs text-gray-700 mt-2">Calculated from previous crop nutrient removal and 60% fertilizer efficiency.</p>
+                                <div className="mt-2 flex gap-2">
+                                  <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="border-green-200 text-green-700 hover:bg-green-50"
+                                    onClick={() => copyText(`N: ${npkResult.N} kg/ha, P: ${npkResult.P} kg/ha, K: ${npkResult.K} kg/ha`, "npk")}
+                                  >
+                                    {copied.which === "npk" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                                    Copy NPK Values
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="space-y-4">
+                              <h4 className="text-gray-900 font-semibold">Soil pH Recommendation</h4>
+                              <div className="bg-green-50 border border-green-100 rounded-lg p-6 text-center">
+                                <div className="text-3xl font-bold text-green-700">{npkResult.ph}</div>
+                                <div className="text-sm text-gray-700 mt-1">Optimal pH Level</div>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  className="border-green-200 text-green-700 hover:bg-green-50"
+                                  onClick={() => copyText(`${npkResult.ph}`, "ph")}
+                                >
+                                  {copied.which === "ph" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                                  Copy pH
+                                </Button>
+                                <Button
+                                  type="button"
+                                  className="bg-green-600 hover:bg-green-700 text-white"
+                                  onClick={() => copyText(`N: ${npkResult.N} kg/ha, P: ${npkResult.P} kg/ha, K: ${npkResult.K} kg/ha, pH: ${npkResult.ph}`, "all")}
+                                >
+                                  {copied.which === "all" ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                                  Copy All
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    <Card className="border-green-100">
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <Beaker className="w-5 h-5 text-green-600" />
+                          <span>NPK Predictor</span>
+                        </CardTitle>
+                        <CardDescription className="text-gray-700">Use the form above to get NPK suggestions.</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  )}
                 </TabsContent>
               </Tabs>
             </div>
