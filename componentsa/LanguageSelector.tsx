@@ -27,7 +27,7 @@ export function LanguageSelector() {
         <Button
           variant="outline"
           size="sm"
-          className="h-9 border-green-200 text-green-700 hover:bg-green-50 focus:ring-green-500"
+          className="h-9 border-green-300 text-green-700 hover:bg-green-100 focus:ring-green-500"
         >
           <Globe className="w-4 h-4 mr-2" />
           {currentLanguage?.nativeName}
@@ -35,7 +35,7 @@ export function LanguageSelector() {
       </PopoverTrigger>
       <PopoverContent className="w-48 p-2" align="end">
         <div className="space-y-1">
-          <div className="px-2 py-1.5 text-sm font-medium text-gray-700 border-b border-gray-100">
+          <div className="px-2 py-1.5 text-sm font-medium text-gray-800 border-b border-green-200">
             {t('header.language')}
           </div>
           {languages.map((lang) => (
@@ -45,8 +45,8 @@ export function LanguageSelector() {
               size="sm"
               className={`w-full justify-start h-auto px-2 py-2 ${
                 language === lang.code 
-                  ? 'bg-green-50 text-green-700' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-green-100 text-green-700' 
+                  : 'text-gray-600 hover:text-gray-800 hover:bg-green-50'
               }`}
               onClick={() => handleLanguageChange(lang.code)}
             >

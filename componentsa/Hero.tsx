@@ -12,33 +12,33 @@ export function Hero({ onPredictClick, onDiseaseClick }: HeroProps) {
   const { t } = useLanguage();
   
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-green-50 to-white py-20 lg:py-32">
+    <section className="relative bg-green-50 py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="flex items-center space-x-2 text-primary">
+            <div className="flex items-center space-x-2 text-green-600">
               <Leaf className="w-5 h-5" />
               <span className="font-medium">{t('hero.smartAgriculture')}</span>
             </div>
             
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-800 leading-tight">
                 {t('hero.aiPowered')}<br />
-                <span className="text-primary">{t('hero.cropSolutions')}</span>
+                <span className="text-green-600">{t('hero.cropSolutions')}</span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-xl text-gray-600 leading-relaxed">
                 {t('hero.description')}
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg" onClick={onPredictClick}>
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-4 text-lg" onClick={onPredictClick}>
                 <Brain className="w-5 h-5 mr-2" />
                 {t('hero.predictNow')}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-4 text-lg" onClick={onDiseaseClick}>
+              <Button size="lg" variant="outline" className="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold px-8 py-4 text-lg" onClick={onDiseaseClick}>
                 <Scan className="w-5 h-5 mr-2" />
                 {t('hero.detectDisease')}
               </Button>
@@ -46,16 +46,16 @@ export function Hero({ onPredictClick, onDiseaseClick }: HeroProps) {
 
             <div className="flex items-center space-x-8 pt-8">
               <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">95%</div>
-                <div className="text-sm text-muted-foreground">{t('hero.accuracyRate')}</div>
+                <div className="text-2xl font-bold text-gray-800">95%</div>
+                <div className="text-sm text-gray-600">{t('hero.accuracyRate')}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">10K+</div>
-                <div className="text-sm text-muted-foreground">{t('hero.farmersTrust')}</div>
+                <div className="text-2xl font-bold text-gray-800">10K+</div>
+                <div className="text-sm text-gray-600">{t('hero.farmersTrust')}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">50+</div>
-                <div className="text-sm text-muted-foreground">{t('hero.cropTypes')}</div>
+                <div className="text-2xl font-bold text-gray-800">50+</div>
+                <div className="text-sm text-gray-600">{t('hero.cropTypes')}</div>
               </div>
             </div>
           </div>
@@ -76,16 +76,16 @@ export function Hero({ onPredictClick, onDiseaseClick }: HeroProps) {
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-primary rounded-full"></div>
                 <div>
-                  <div className="text-sm font-medium text-card-foreground">{t('hero.predictionReady')}</div>
-                  <div className="text-xs text-muted-foreground">{t('hero.cornYield')}</div>
+                  <div className="text-sm font-medium text-gray-800">{t('hero.predictionReady')}</div>
+                  <div className="text-xs text-gray-600">{t('hero.cornYield')}</div>
                 </div>
               </div>
             </div>
             
             <div className="absolute -top-6 -right-6 bg-card rounded-xl shadow-lg p-4 border border-border">
               <div className="text-center">
-                <div className="text-lg font-bold text-primary">+23%</div>
-                <div className="text-xs text-muted-foreground">{t('hero.yieldIncrease')}</div>
+                <div className="text-lg font-bold text-green-600">+23%</div>
+                <div className="text-xs text-gray-600">{t('hero.yieldIncrease')}</div>
               </div>
             </div>
           </div>

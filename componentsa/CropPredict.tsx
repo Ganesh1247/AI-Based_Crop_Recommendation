@@ -194,15 +194,15 @@ export function CropPredict({ onBack }: CropPredictProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
+    <div className="min-h-screen bg-green-50">
       {/* Header */}
-      <header className="bg-white border-b border-green-100">
+      <header className="bg-green-50 border-b border-green-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Button
               variant="ghost"
               onClick={onBack}
-              className="text-gray-600 hover:text-green-600"
+              className="text-gray-800 hover:text-green-600"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Home
@@ -212,7 +212,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
               <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
                 <Leaf className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-semibold text-gray-900">CropPredict</span>
+              <span className="text-xl font-semibold text-gray-800">CropPredict</span>
             </div>
           </div>
         </div>
@@ -222,10 +222,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
             Crop Yield Prediction
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             Get accurate crop yield predictions using AI or by entering soil parameters manually
           </p>
         </div>
@@ -233,7 +233,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
         {/* Error Message */}
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-            <p className="text-red-700 text-center">{error}</p>
+            <p className="text-red-800 text-center">{error}</p>
           </div>
         )}
 
@@ -260,7 +260,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                         <Beaker className="w-5 h-5 text-green-600" />
                         <span>Soil Parameters</span>
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-gray-700">
                         Enter the soil composition values to get a precise yield prediction
                       </CardDescription>
                     </CardHeader>
@@ -269,7 +269,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                         <div className="grid md:grid-cols-2 gap-6">
                           {/* Nitrogen */}
                           <div className="space-y-2">
-                            <Label htmlFor="nitrogen" className="flex items-center space-x-2">
+                            <Label htmlFor="nitrogen" className="flex items-center space-x-2 text-gray-800">
                               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                               <span>Nitrogen (N) - ppm</span>
                             </Label>
@@ -286,7 +286,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
                           {/* Phosphorus */}
                           <div className="space-y-2">
-                            <Label htmlFor="phosphorus" className="flex items-center space-x-2">
+                            <Label htmlFor="phosphorus" className="flex items-center space-x-2 text-gray-800">
                               <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                               <span>Phosphorus (P) - ppm</span>
                             </Label>
@@ -303,7 +303,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
                           {/* Potassium */}
                           <div className="space-y-2">
-                            <Label htmlFor="potassium" className="flex items-center space-x-2">
+                            <Label htmlFor="potassium" className="flex items-center space-x-2 text-gray-800">
                               <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
                               <span>Potassium (K) - ppm</span>
                             </Label>
@@ -320,7 +320,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
                           {/* pH */}
                           <div className="space-y-2">
-                            <Label htmlFor="ph" className="flex items-center space-x-2">
+                            <Label htmlFor="ph" className="flex items-center space-x-2 text-gray-800">
                               <Droplets className="w-4 h-4 text-green-600" />
                               <span>pH Level</span>
                             </Label>
@@ -367,7 +367,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                         <MapPin className="w-5 h-5 text-green-600" />
                         <span>Location</span>
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-gray-700">
                         Get your location to analyze local soil and weather conditions
                       </CardDescription>
                     </CardHeader>
@@ -389,7 +389,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                           <div className="w-full border-t border-green-200"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                          <span className="px-2 bg-white text-gray-500">Or search manually</span>
+                          <span className="px-2 bg-green-50 text-gray-700">Or search manually</span>
                         </div>
                       </div>
 
@@ -430,7 +430,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                           <Satellite className="w-5 h-5 text-green-600" />
                           <span>SoilGrids Analysis</span>
                         </CardTitle>
-                        <CardDescription>
+                        <CardDescription className="text-gray-700">
                           Soil composition data from global soil database
                         </CardDescription>
                       </CardHeader>
@@ -438,38 +438,38 @@ export function CropPredict({ onBack }: CropPredictProps) {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div className="space-y-3">
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Nitrogen (N):</span>
-                              <span className="font-medium">{aiData.soilGridsData.nitrogen} ppm</span>
+                              <span className="text-gray-800">Nitrogen (N):</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.nitrogen} ppm</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Phosphorus (P):</span>
-                              <span className="font-medium">{aiData.soilGridsData.phosphorus} ppm</span>
+                              <span className="text-gray-800">Phosphorus (P):</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.phosphorus} ppm</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Potassium (K):</span>
-                              <span className="font-medium">{aiData.soilGridsData.potassium} ppm</span>
+                              <span className="text-gray-800">Potassium (K):</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.potassium} ppm</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">pH Level:</span>
-                              <span className="font-medium">{aiData.soilGridsData.ph}</span>
+                              <span className="text-gray-800">pH Level:</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.ph}</span>
                             </div>
                           </div>
                           <div className="space-y-3">
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Clay Content:</span>
-                              <span className="font-medium">{aiData.soilGridsData.clay_content}%</span>
+                              <span className="text-gray-800">Clay Content:</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.clay_content}%</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Sand Content:</span>
-                              <span className="font-medium">{aiData.soilGridsData.sand_content}%</span>
+                              <span className="text-gray-800">Sand Content:</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.sand_content}%</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Organic Carbon:</span>
-                              <span className="font-medium">{aiData.soilGridsData.organic_carbon} g/kg</span>
+                              <span className="text-gray-800">Organic Carbon:</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.organic_carbon} g/kg</span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-gray-600">Bulk Density:</span>
-                              <span className="font-medium">{aiData.soilGridsData.bulk_density} g/cm³</span>
+                              <span className="text-gray-800">Bulk Density:</span>
+                              <span className="font-medium text-gray-900">{aiData.soilGridsData.bulk_density} g/cm³</span>
                             </div>
                           </div>
                         </div>
@@ -484,7 +484,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                         <Brain className="w-5 h-5 text-green-600" />
                         <span>AI Analysis</span>
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-gray-700">
                         Advanced prediction using location-based soil and climate data
                       </CardDescription>
                     </CardHeader>
@@ -508,7 +508,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                       </Button>
                       
                       {(!aiData.location || !aiData.soilGridsData) && (
-                        <p className="text-sm text-gray-500 text-center mt-2">
+                        <p className="text-sm text-gray-700 text-center mt-2">
                           Please set your location to enable AI prediction
                         </p>
                       )}
@@ -530,19 +530,19 @@ export function CropPredict({ onBack }: CropPredictProps) {
                       <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-green-600 font-semibold">1</span>
                       </div>
-                      <span className="text-gray-600">Enter soil parameters or use AI analysis</span>
+                      <span className="text-gray-800">Enter soil parameters or use AI analysis</span>
                     </div>
                     <div className="flex items-start space-x-3">
                       <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-green-600 font-semibold">2</span>
                       </div>
-                      <span className="text-gray-600">Our algorithm processes the data</span>
+                      <span className="text-gray-800">Our algorithm processes the data</span>
                     </div>
                     <div className="flex items-start space-x-3">
                       <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-green-600 font-semibold">3</span>
                       </div>
-                      <span className="text-gray-600">Get detailed yield predictions and recommendations</span>
+                      <span className="text-gray-800">Get detailed yield predictions and recommendations</span>
                     </div>
                   </div>
                 </CardContent>
@@ -554,20 +554,20 @@ export function CropPredict({ onBack }: CropPredictProps) {
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Nitrogen (N):</span>
-                    <span className="font-medium">20-80 ppm</span>
+                    <span className="text-gray-800">Nitrogen (N):</span>
+                    <span className="font-medium text-gray-900">20-80 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Phosphorus (P):</span>
-                    <span className="font-medium">10-70 ppm</span>
+                    <span className="text-gray-800">Phosphorus (P):</span>
+                    <span className="font-medium text-gray-900">10-70 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Potassium (K):</span>
-                    <span className="font-medium">10-40 ppm</span>
+                    <span className="text-gray-800">Potassium (K):</span>
+                    <span className="font-medium text-gray-900">10-40 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">pH Level:</span>
-                    <span className="font-medium">5.5-8.0</span>
+                    <span className="text-gray-800">pH Level:</span>
+                    <span className="font-medium text-gray-900">5.5-8.0</span>
                   </div>
                 </CardContent>
               </Card>
@@ -595,17 +595,17 @@ export function CropPredict({ onBack }: CropPredictProps) {
                   <div className="text-4xl font-bold text-green-600 mb-2">
                     {prediction.yield_prediction}%
                   </div>
-                  <p className="text-gray-600">Expected Yield Success Rate</p>
+                  <p className="text-gray-800">Expected Yield Success Rate</p>
                   <Progress value={prediction.yield_prediction} className="mt-4 h-3" />
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6 mt-8">
                   <div className="text-center p-4 bg-white rounded-lg border border-green-100">
-                    <h4 className="font-semibold text-gray-800 mb-2">Expected Harvest</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">Expected Harvest</h4>
                     <p className="text-green-600 font-medium">{prediction.expected_harvest_date}</p>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg border border-green-100">
-                    <h4 className="font-semibold text-gray-800 mb-2">Estimated Yield</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">Estimated Yield</h4>
                     <p className="text-green-600 font-medium">{prediction.estimated_yield}</p>
                   </div>
                 </div>
@@ -614,14 +614,14 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
             <Card className="border-green-100">
               <CardHeader>
-                <CardTitle className="text-gray-800">Recommendations</CardTitle>
+                <CardTitle className="text-gray-900">Recommendations</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   {prediction.recommendations.map((rec: string, index: number) => (
                     <li key={index} className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-600">{rec}</span>
+                      <span className="text-gray-800">{rec}</span>
                     </li>
                   ))}
                 </ul>

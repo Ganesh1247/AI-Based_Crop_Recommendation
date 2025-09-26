@@ -148,11 +148,11 @@ export function Chatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-96 shadow-2xl border-border transition-all duration-300 ${
+      <Card className={`w-96 shadow-2xl border-green-200 transition-all duration-300 ${
         isMinimized ? 'h-14' : 'h-[32rem]'
       }`}>
         {/* Header */}
-        <CardHeader className="bg-primary text-primary-foreground rounded-t-lg p-3">
+        <CardHeader className="bg-green-600 text-white rounded-t-lg p-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
@@ -161,7 +161,7 @@ export function Chatbot() {
               <div>
                 <CardTitle className="text-sm">{t('chat.title')}</CardTitle>
                 {!isMinimized && (
-                  <p className="text-xs text-primary-foreground/80 mt-0.5">{t('chat.subtitle')}</p>
+                  <p className="text-xs text-white/80 mt-0.5">{t('chat.subtitle')}</p>
                 )}
               </div>
             </div>
@@ -170,7 +170,7 @@ export function Chatbot() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-primary-foreground hover:bg-primary-foreground/20 p-1 h-7 w-7"
+                className="text-white hover:bg-white/20 p-1 h-7 w-7"
               >
                 {isMinimized ? (
                   <Maximize2 className="w-4 h-4" />
@@ -182,7 +182,7 @@ export function Chatbot() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(false)}
-                className="text-primary-foreground hover:bg-primary-foreground/20 p-1 h-7 w-7"
+                className="text-white hover:bg-white/20 p-1 h-7 w-7"
               >
                 <X className="w-4 h-4" />
               </Button>
@@ -205,8 +205,8 @@ export function Chatbot() {
                     }`}>
                       <div className={`w-7 h-7 rounded-full flex items-center justify-center ${
                         message.isUser 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted text-muted-foreground'
+                          ? 'bg-green-600 text-white' 
+                          : 'bg-gray-100 text-gray-800'
                       }`}>
                         {message.isUser ? (
                           <User className="w-4 h-4" />
@@ -217,13 +217,13 @@ export function Chatbot() {
                       <div
                         className={`rounded-lg p-3 ${
                           message.isUser
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted text-muted-foreground'
+                            ? 'bg-green-600 text-white'
+                            : 'bg-gray-100 text-gray-800'
                         }`}
                       >
                         <p className="text-sm whitespace-pre-line">{message.text}</p>
                         <p className={`text-xs mt-1 ${
-                          message.isUser ? 'text-primary-foreground/70' : 'text-muted-foreground/70'
+                          message.isUser ? 'text-white/70' : 'text-gray-600'
                         }`}>
                           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
@@ -235,14 +235,14 @@ export function Chatbot() {
                 {isLoading && (
                   <div className="flex justify-start">
                     <div className="flex items-start space-x-2">
-                      <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
-                        <Bot className="w-4 h-4 text-muted-foreground" />
+                      <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
+                        <Bot className="w-4 h-4 text-gray-600" />
                       </div>
-                      <div className="bg-muted rounded-lg p-3">
+                      <div className="bg-gray-100 rounded-lg p-3">
                         <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce"></div>
-                          <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         </div>
                       </div>
                     </div>
@@ -260,7 +260,7 @@ export function Chatbot() {
                     <Badge
                       key={index}
                       variant="secondary"
-                      className="cursor-pointer hover:bg-accent text-xs p-1.5 bg-accent/50 text-accent-foreground border border-border"
+                      className="cursor-pointer hover:bg-green-100 text-xs p-1.5 bg-green-50 text-green-800 border border-green-200"
                       onClick={() => handleSendMessage(suggestion)}
                     >
                       {suggestion}
@@ -271,7 +271,7 @@ export function Chatbot() {
             )}
 
             {/* Input Area */}
-            <div className="p-4 border-t border-border">
+            <div className="p-4 border-t border-green-200">
               <div className="flex space-x-2">
                 <Input
                   ref={inputRef}
@@ -291,14 +291,14 @@ export function Chatbot() {
                 </Button>
               </div>
               <div className="flex justify-between items-center mt-2">
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-gray-600">
                   Press Enter to send
                 </p>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={clearChat}
-                  className="text-xs text-muted-foreground hover:text-foreground"
+                  className="text-xs text-gray-600 hover:text-gray-800"
                 >
                   Clear chat
                 </Button>

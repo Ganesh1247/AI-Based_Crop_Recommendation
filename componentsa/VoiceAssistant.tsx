@@ -386,9 +386,9 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
   }, [messages]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-white">
+    <div className="min-h-screen bg-green-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-green-50 shadow-sm border-b border-green-200">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -396,7 +396,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                 variant="ghost" 
                 size="sm" 
                 onClick={onBack}
-                className="hover:bg-gray-100"
+                className="hover:bg-green-100 text-gray-800"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 {t('common.back')}
@@ -405,7 +405,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-green-600" />
                 </div>
-                <span className="text-xl font-semibold text-gray-900">{t('voice.title')}</span>
+                <span className="text-xl font-semibold text-gray-800">{t('voice.title')}</span>
               </div>
             </div>
             
@@ -447,10 +447,10 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Mic className="w-8 h-8 text-green-600" />
           </div>
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
             {t('voice.title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             {t('voice.subtitle')}
           </p>
         </div>
@@ -461,7 +461,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
             <Card>
               <CardHeader>
                 <CardTitle>{t('voice.title')}</CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-700">
                   {t('voice.subtitle')}
                 </CardDescription>
               </CardHeader>
@@ -471,26 +471,26 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                   {voiceState.isListening && (
                     <div className="flex items-center justify-center space-x-2 mb-2">
                       <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-green-700 font-medium">{t('voice.listening')}</span>
+                      <span className="text-green-800 font-medium">{t('voice.listening')}</span>
                     </div>
                   )}
                   
                   {voiceState.isProcessing && (
                     <div className="flex items-center justify-center space-x-2 mb-2">
                       <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                      <span className="text-green-700 font-medium">{t('voice.processing')}</span>
+                      <span className="text-green-800 font-medium">{t('voice.processing')}</span>
                     </div>
                   )}
                   
                   {voiceState.isSpeaking && (
                     <div className="flex items-center justify-center space-x-2 mb-2">
                       <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
-                      <span className="text-green-700 font-medium">{t('voice.speaking')}</span>
+                      <span className="text-green-800 font-medium">{t('voice.speaking')}</span>
                     </div>
                   )}
                   
                   {voiceState.transcript && (
-                    <div className="text-sm text-gray-600 mt-2 p-2 bg-white rounded border">
+                    <div className="text-sm text-gray-800 mt-2 p-2 bg-white rounded border">
                       {voiceState.transcript}
                     </div>
                   )}
@@ -550,7 +550,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                           className={`max-w-[80%] rounded-lg px-4 py-2 ${
                             message.type === 'user'
                               ? 'bg-green-600 text-white'
-                              : 'bg-gray-100 text-gray-900'
+                              : 'bg-gray-100 text-gray-800'
                           }`}
                         >
                           <p className="text-sm">{message.content}</p>

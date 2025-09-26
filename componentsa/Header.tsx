@@ -18,7 +18,7 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
   const { user, logout } = useAuth();
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+    <header className="bg-green-50 border-b border-green-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -26,20 +26,20 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <Leaf className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-semibold text-foreground">{t('header.cropPredict')}</span>
+            <span className="text-xl font-semibold text-gray-800">{t('header.cropPredict')}</span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-gray-600 hover:text-green-600 transition-colors"
             >
               {t('header.home')}
             </button>
             <button 
               onClick={onFeaturesClick || (() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }))}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-gray-600 hover:text-green-600 transition-colors"
             >
               {t('header.features')}
             </button>
@@ -53,7 +53,7 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
               <div className="flex items-center space-x-3">
                 <button
                   onClick={onProfileClick}
-                  className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors p-2 rounded-lg hover:bg-accent"
+                  className="flex items-center space-x-2 text-gray-800 hover:text-green-600 transition-colors p-2 rounded-lg hover:bg-green-100"
                 >
                   <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
                     <User className="w-4 h-4 text-accent-foreground" />
@@ -110,7 +110,7 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
                   document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
                   setIsMenuOpen(false);
                 }}
-                className="text-muted-foreground hover:text-primary py-2 text-left"
+                className="text-gray-600 hover:text-green-600 py-2 text-left"
               >
                 {t('header.home')}
               </button>
@@ -123,7 +123,7 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
                   }
                   setIsMenuOpen(false);
                 }}
-                className="text-muted-foreground hover:text-primary py-2 text-left"
+                className="text-gray-600 hover:text-green-600 py-2 text-left"
               >
                 {t('header.features')}
               </button>
@@ -136,7 +136,7 @@ export function Header({ onSignInClick, onSignUpClick, onProfileClick, onFeature
                   <div className="space-y-2">
                     <button
                       onClick={onProfileClick}
-                      className="flex items-center space-x-2 p-2 bg-accent rounded-lg w-full hover:bg-accent/80 transition-colors"
+                      className="flex items-center space-x-2 p-2 bg-green-100 rounded-lg w-full hover:bg-green-200 transition-colors"
                     >
                       <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                         <User className="w-4 h-4 text-primary" />
