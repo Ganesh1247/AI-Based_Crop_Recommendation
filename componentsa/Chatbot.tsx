@@ -148,11 +148,11 @@ export function Chatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-96 shadow-2xl border-green-200 transition-all duration-300 ${
+      <Card className={`w-96 glass-card shadow-2xl border-slate-200 dark:border-slate-800 transition-all duration-300 overflow-hidden ${
         isMinimized ? 'h-14' : 'h-[32rem]'
       }`}>
         {/* Header */}
-        <CardHeader className="bg-green-600 text-white rounded-t-lg p-3">
+        <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-t-xl p-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
@@ -191,9 +191,9 @@ export function Chatbot() {
         </CardHeader>
 
         {!isMinimized && (
-          <CardContent className="p-0 h-full flex flex-col">
+          <CardContent className="p-0 h-full flex flex-col bg-white dark:bg-slate-900">
             {/* Messages Area */}
-            <ScrollArea className="flex-1 p-4 h-80">
+            <ScrollArea className="flex-1 p-4 h-80 bg-slate-50/50 dark:bg-slate-900/50">
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
@@ -205,8 +205,8 @@ export function Chatbot() {
                     }`}>
                       <div className={`w-7 h-7 rounded-full flex items-center justify-center ${
                         message.isUser 
-                          ? 'bg-green-600 text-white' 
-                          : 'bg-gray-100 text-gray-800'
+                          ? 'bg-emerald-600 text-white' 
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                       }`}>
                         {message.isUser ? (
                           <User className="w-4 h-4" />
@@ -215,15 +215,15 @@ export function Chatbot() {
                         )}
                       </div>
                       <div
-                        className={`rounded-lg p-3 ${
+                        className={`rounded-xl p-3 shadow-sm ${
                           message.isUser
-                            ? 'bg-green-600 text-white'
-                            : 'bg-gray-100 text-gray-800'
+                            ? 'bg-gradient-to-br from-emerald-500 to-teal-500 text-white'
+                            : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-700'
                         }`}
                       >
                         <p className="text-sm whitespace-pre-line">{message.text}</p>
-                        <p className={`text-xs mt-1 ${
-                          message.isUser ? 'text-white/70' : 'text-gray-600'
+                        <p className={`text-[10px] mt-1.5 ${
+                          message.isUser ? 'text-white/70 text-right' : 'text-slate-500 dark:text-slate-400'
                         }`}>
                           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
@@ -260,7 +260,7 @@ export function Chatbot() {
                     <Badge
                       key={index}
                       variant="secondary"
-                      className="cursor-pointer hover:bg-green-100 text-xs p-1.5 bg-green-50 text-green-800 border border-green-200"
+                      className="cursor-pointer hover:bg-emerald-100 dark:hover:bg-emerald-900/40 text-xs p-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors"
                       onClick={() => handleSendMessage(suggestion)}
                     >
                       {suggestion}
@@ -271,7 +271,7 @@ export function Chatbot() {
             )}
 
             {/* Input Area */}
-            <div className="p-4 border-t border-green-200">
+            <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
               <div className="flex space-x-2">
                 <Input
                   ref={inputRef}
@@ -279,13 +279,13 @@ export function Chatbot() {
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder={t('chat.placeholder')}
-                  className="flex-1"
+                  className="flex-1 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 focus:ring-emerald-500"
                   disabled={isLoading}
                 />
                 <Button
                   onClick={() => handleSendMessage()}
                   disabled={!inputMessage.trim() || isLoading}
-                  className="px-3"
+                  className="px-3 bg-emerald-600 hover:bg-emerald-500 text-white"
                 >
                   <Send className="w-4 h-4" />
                 </Button>

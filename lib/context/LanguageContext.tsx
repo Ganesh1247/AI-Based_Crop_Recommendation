@@ -89,6 +89,11 @@ const translations = {
     'auth.verify': 'Verify',
     'auth.resendCode': 'Resend Code',
     'auth.changeNumber': 'Change Number',
+    'auth.username': 'Username',
+    'auth.loginFailed': 'Login failed. Please check your credentials.',
+    'auth.invalidCredentials': 'Invalid credentials provided.',
+    'auth.signupFailed': 'Signup failed. Please try again.',
+    'auth.invalidForm': 'Please fill out all fields correctly.',
     
     // Profile
     'profile.title': 'Your Profile',
@@ -326,6 +331,11 @@ const translations = {
     'auth.verify': 'सत्यापित करें',
     'auth.resendCode': 'कोड फिर से भेजें',
     'auth.changeNumber': 'नंबर बदलें',
+    'auth.username': 'उपयोगकर्ता नाम',
+    'auth.loginFailed': 'लॉगिन विफल रहा। कृपया अपनी साख की जाँच करें।',
+    'auth.invalidCredentials': 'अमान्य साख प्रदान की गई।',
+    'auth.signupFailed': 'साइनअप विफल रहा। कृपया पुनः प्रयास करें।',
+    'auth.invalidForm': 'कृपया सभी फ़ील्ड सही-सही भरें।',
     
     // Profile
     'profile.title': 'आपकी प्रोफ़ाइल',
@@ -563,6 +573,11 @@ const translations = {
     'auth.verify': 'ధృవీకరించండి',
     'auth.resendCode': 'కోడ్‌ను మళ్లీ పంపండి',
     'auth.changeNumber': 'నంబర్‌ను మార్చండి',
+    'auth.username': 'వినియోగదారు పేరు',
+    'auth.loginFailed': 'లాగిన్ విఫలమైంది. దయచేసి మీ ఆధారాలను తనిఖీ చేయండి.',
+    'auth.invalidCredentials': 'చెల్లని ఆధారాలు అందించబడ్డాయి.',
+    'auth.signupFailed': 'సైన్అప్ విఫలమైంది. దయచేసి మళ్లీ ప్రయత్నించండి.',
+    'auth.invalidForm': 'దయచేసి అన్ని ఫీల్డ్‌లను సరిగ్గా పూరించండి.',
     
     // Profile
     'profile.title': 'మీ ప్రొఫైల్',

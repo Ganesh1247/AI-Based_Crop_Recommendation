@@ -231,10 +231,10 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
       {/* Header */}
       {onBack && (
-        <header className="bg-white border-b border-green-100">
+        <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-slate-800 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Button
@@ -247,8 +247,8 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
               </Button>
               
               <div className="flex items-center space-x-2">
-                <Scan className="w-8 h-8 text-green-600" />
-                <span className="text-xl font-semibold text-gray-900">{t('disease.title')}</span>
+                <Scan className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 to-teal-600 dark:from-emerald-400 dark:to-teal-300 tracking-tight">{t('disease.title')}</span>
               </div>
 
               <div className="w-20"></div>
@@ -259,11 +259,11 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 animate-fade-in">
+          <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
             {t('disease.title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             {t('disease.subtitle')}
           </p>
         </div>
@@ -280,28 +280,29 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
         {/* Camera View */}
         {showCamera && (
-          <Card className="mb-6 border-green-200">
+          <Card className="mb-6 border-emerald-200 dark:border-emerald-800/50 glass-card">
             <CardContent className="p-6">
               <div className="relative">
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
-                  className="w-full rounded-lg"
+                  className="w-full rounded-xl shadow-inner"
                 />
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
                   <Button
                     onClick={captureImage}
-                    className="bg-green-600 hover:bg-green-700 text-white"
+                    className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-full shadow-lg"
                     size="lg"
                   >
                     <Camera className="w-5 h-5 mr-2" />
-                    {t('disease.capturePhoto')}
+                    {t('disease.capturePhoto') === 'disease.capturePhoto' ? 'Capture Photo' : t('disease.capturePhoto')}
                   </Button>
                   <Button
                     onClick={stopCamera}
                     variant="outline"
                     size="lg"
+                    className="rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700"
                   >
                     <X className="w-5 h-5 mr-2" />
                     {t('common.cancel')}
@@ -314,20 +315,32 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
         {/* Upload Options */}
         {!showCamera && !result && !isAnalyzing && (
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Card className="border-green-200 hover:shadow-lg transition-shadow cursor-pointer" onClick={startCamera}>
-              <CardContent className="p-8 text-center">
-                <Camera className="w-16 h-16 text-green-600 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('disease.useCamera')}</h3>
-                <p className="text-gray-600">{t('disease.cameraDesc')}</p>
+          <div className="grid md:grid-cols-2 gap-6 mb-8 animate-fade-in text-center">
+            <Card className="glass-card border-emerald-200 dark:border-emerald-800/50 hover:shadow-xl hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 cursor-pointer group" onClick={startCamera}>
+              <CardContent className="p-10">
+                <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Camera className="w-10 h-10 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                  {t('disease.useCamera') === 'disease.useCamera' ? 'Use Camera' : t('disease.useCamera')}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">
+                  {t('disease.cameraDesc') === 'disease.cameraDesc' ? 'Take a photo of the affected plant' : t('disease.cameraDesc')}
+                </p>
               </CardContent>
             </Card>
 
-            <Card className="border-green-200 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-              <CardContent className="p-8 text-center">
-                <Upload className="w-16 h-16 text-green-600 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('disease.uploadImage')}</h3>
-                <p className="text-gray-600">{t('disease.uploadDesc')}</p>
+            <Card className="glass-card border-emerald-200 dark:border-emerald-800/50 hover:shadow-xl hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 cursor-pointer group" onClick={() => fileInputRef.current?.click()}>
+              <CardContent className="p-10">
+                <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Upload className="w-10 h-10 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                  {t('disease.uploadImage') === 'disease.uploadImage' ? 'Upload Image' : t('disease.uploadImage')}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">
+                  {t('disease.uploadDesc') === 'disease.uploadDesc' ? 'Upload an image from your device' : t('disease.uploadDesc')}
+                </p>
               </CardContent>
             </Card>
 
@@ -343,20 +356,26 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
         {/* Analysis in Progress */}
         {isAnalyzing && (
-          <Card className="border-green-200">
-            <CardContent className="p-8 text-center">
-              <div className="flex flex-col items-center space-y-4">
-                <Loader2 className="w-16 h-16 text-green-600 animate-spin" />
-                <h3 className="text-xl font-semibold text-gray-900">{t('disease.analyzing')}</h3>
-                <p className="text-gray-600">{t('disease.analyzingDesc')}</p>
-                <Progress value={65} className="w-full max-w-md" />
+          <Card className="glass-card border-emerald-200 dark:border-emerald-800/50 animate-pulse">
+            <CardContent className="p-12 text-center">
+              <div className="flex flex-col items-center space-y-6">
+                <div className="relative">
+                  <div className="w-24 h-24 border-4 border-emerald-200 border-t-emerald-600 dark:border-emerald-900 dark:border-t-emerald-500 rounded-full animate-spin"></div>
+                  <Scan className="w-8 h-8 text-emerald-600 dark:text-emerald-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('disease.analyzing')}</h3>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    {t('disease.analyzingDesc') === 'disease.analyzingDesc' ? 'AI is scanning the plant...' : t('disease.analyzingDesc')}
+                  </p>
+                </div>
               </div>
               {capturedImage && (
-                <div className="mt-6">
+                <div className="mt-8">
                   <img 
                     src={capturedImage} 
                     alt="Captured plant" 
-                    className="max-w-sm mx-auto rounded-lg border border-gray-200"
+                    className="max-w-sm mx-auto rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 opacity-50"
                   />
                 </div>
               )}
@@ -366,50 +385,58 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
         {/* Detection Results */}
         {result && (
-          <div className="space-y-6">
-            <Card className="border-green-200">
-              <CardHeader>
+          <div className="space-y-6 animate-fade-in">
+            <Card className="glass-card border-emerald-200 dark:border-emerald-800/50 shadow-xl overflow-hidden">
+              <CardHeader className="bg-white/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center space-x-2">
+                  <CardTitle className="flex items-center space-x-3 text-2xl font-bold text-slate-900 dark:text-white">
                     {result.disease === 'Healthy Plant' ? (
-                      <CheckCircle className="w-6 h-6 text-green-600" />
+                      <div className="bg-emerald-100 dark:bg-emerald-900/50 p-2 rounded-lg">
+                        <CheckCircle className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                      </div>
                     ) : (
-                      <AlertTriangle className="w-6 h-6 text-red-600" />
+                      <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded-lg">
+                        <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                      </div>
                     )}
                     <span>{t('disease.results')}</span>
                   </CardTitle>
-                  <Button onClick={resetDetection} variant="outline" size="sm">
+                  <Button onClick={resetDetection} variant="outline" size="sm" className="rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700">
                     <RotateCcw className="w-4 h-4 mr-2" />
-                    {t('disease.analyzeAnother')}
+                    {t('disease.newAnalysis') === 'disease.newAnalysis' ? 'Analyze Another' : t('disease.newAnalysis')}
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
+              <CardContent className="space-y-6 pt-6">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                     <img 
                       src={result.imageUrl} 
                       alt="Analyzed plant" 
-                      className="w-full rounded-lg border border-gray-200"
+                      className="w-full rounded-xl border-4 border-white dark:border-slate-800 shadow-lg object-cover"
                     />
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{result.disease}</h3>
-                      <p className="text-gray-600 mb-4">{result.description}</p>
+                      <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3">{result.disease}</h3>
+                      <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">{result.description}</p>
                     </div>
                     
-                    <div className="flex items-center space-x-4">
+                    <div className="flex flex-wrap items-center gap-6 p-5 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800">
                       <div>
-                        <div className="text-sm font-medium text-gray-700 mb-1">{t('disease.confidence')}</div>
-                        <div className={`text-2xl font-bold ${getConfidenceColor(result.confidence)}`}>
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">{t('disease.confidence')}</div>
+                        <div className={`text-3xl font-black ${getConfidenceColor(result.confidence)}`}>
                           {result.confidence}%
                         </div>
                       </div>
+                      <div className="w-px h-12 bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
                       <div>
-                        <div className="text-sm font-medium text-gray-700 mb-1">{t('disease.severity')}</div>
-                        <Badge className={getSeverityColor(result.severity)}>
-                          {t(`disease.severity.${result.severity.toLowerCase()}`)}
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                          {t('disease.severity') === 'disease.severity' ? 'Severity' : t('disease.severity')}
+                        </div>
+                        <Badge className={`${getSeverityColor(result.severity)} px-3 py-1 text-sm rounded-full`}>
+                          {t(`disease.severity.${result.severity.toLowerCase()}`) === `disease.severity.${result.severity.toLowerCase()}` ? result.severity : t(`disease.severity.${result.severity.toLowerCase()}`)}
                         </Badge>
                       </div>
                     </div>
@@ -420,44 +447,42 @@ export function DiseaseDetection({ onBack }: DiseaseDetectionProps) {
 
             {/* Treatment Recommendations */}
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="border-red-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2 text-red-700">
+              <Card className="glass-card border-red-200 dark:border-red-900/30">
+                <CardHeader className="bg-red-50/50 dark:bg-red-900/10 border-b border-red-100 dark:border-red-900/20">
+                  <CardTitle className="flex items-center space-x-2 text-red-700 dark:text-red-400">
                     <AlertTriangle className="w-5 h-5" />
                     <span>{t('disease.treatment')}</span>
                   </CardTitle>
-                  <CardDescription>{t('disease.treatmentDesc')}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
+                <CardContent className="pt-6">
+                  <ul className="space-y-4">
                     {result.treatment.map((step, index) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-6 h-6 bg-red-100 text-red-700 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                      <li key={index} className="flex items-start space-x-4">
+                        <div className="w-8 h-8 bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-400 rounded-full flex items-center justify-center text-sm font-bold shadow-sm flex-shrink-0">
                           {index + 1}
                         </div>
-                        <span className="text-gray-700">{step}</span>
+                        <span className="text-slate-700 dark:text-slate-300 pt-1 leading-relaxed">{step}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
               </Card>
 
-              <Card className="border-green-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2 text-green-700">
+              <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
+                <CardHeader className="bg-emerald-50/50 dark:bg-emerald-900/10 border-b border-emerald-100 dark:border-emerald-800/50">
+                  <CardTitle className="flex items-center space-x-2 text-emerald-700 dark:text-emerald-400">
                     <CheckCircle className="w-5 h-5" />
                     <span>{t('disease.prevention')}</span>
                   </CardTitle>
-                  <CardDescription>{t('disease.preventionDesc')}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
+                <CardContent className="pt-6">
+                  <ul className="space-y-4">
                     {result.prevention.map((step, index) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                      <li key={index} className="flex items-start space-x-4">
+                        <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 rounded-full flex items-center justify-center text-sm font-bold shadow-sm flex-shrink-0">
                           {index + 1}
                         </div>
-                        <span className="text-gray-700">{step}</span>
+                        <span className="text-slate-700 dark:text-slate-300 pt-1 leading-relaxed">{step}</span>
                       </li>
                     ))}
                   </ul>

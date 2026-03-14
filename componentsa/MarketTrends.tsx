@@ -250,10 +250,10 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
       {/* Header */}
       {onBack && (
-        <header className="bg-white border-b border-green-100">
+        <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-slate-800 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Button
@@ -266,8 +266,8 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
               </Button>
               
               <div className="flex items-center space-x-2">
-                <BarChart3 className="w-8 h-8 text-green-600" />
-                <span className="text-xl font-semibold text-gray-900">{t('market.title')}</span>
+                <BarChart3 className="w-8 h-8 text-green-600 dark:text-emerald-400" />
+                <span className="text-xl font-semibold text-slate-900 dark:text-white">{t('market.title')}</span>
               </div>
 
               <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -282,10 +282,10 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header with Location Control */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Market Trends - {selectedState}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-6">
             Real-time crop prices and market insights for {selectedState}
           </p>
           
@@ -302,7 +302,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
                   value={locationInput}
                   onChange={(e) => setLocationInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleLocationSearch()}
-                  className="border-green-200 focus:border-green-500 rounded-xl"
+                  className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 rounded-xl"
                 />
                 <Button
                   onClick={handleLocationSearch}
@@ -325,7 +325,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
         {selectedState && (
           <Tabs defaultValue="prices" className="space-y-6">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="prices">{t('market.cropPrices')}</TabsTrigger>
+              <TabsTrigger value="prices">{t('market.cropPrices') === 'market.cropPrices' ? 'Crop Prices' : t('market.cropPrices')}</TabsTrigger>
               <TabsTrigger value="insights">{t('market.marketInsights')}</TabsTrigger>
               <TabsTrigger value="recommendations">{t('market.productionTips')}</TabsTrigger>
             </TabsList>
@@ -334,16 +334,16 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
             <TabsContent value="prices" className="space-y-6">
               <div className="grid gap-4">
                 {cropPrices.map((crop, index) => (
-                  <Card key={index} className="border-green-200 hover:shadow-md transition-shadow">
+                  <Card key={index} className="glass-card border-emerald-200 dark:border-emerald-800/50 hover:shadow-md transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <Package className="w-6 h-6 text-green-600" />
+                          <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center">
+                            <Package className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                           </div>
                           <div>
-                            <h3 className="text-lg font-semibold text-gray-900">{crop.name}</h3>
-                            <div className="flex items-center space-x-2 text-sm text-gray-600">
+                            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{crop.name}</h3>
+                            <div className="flex items-center space-x-2 text-sm text-slate-600 dark:text-slate-400">
                               <Calendar className="w-4 h-4" />
                               <span>{crop.season} {t('market.season')}</span>
                             </div>
@@ -351,7 +351,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
                         </div>
 
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-gray-900 mb-1">
+                          <div className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
                             {crop.currentPrice.toLocaleString('en-IN')} {crop.unit}
                           </div>
                           <div className={`flex items-center space-x-1 ${
@@ -420,7 +420,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
             {/* Production Recommendations Tab */}
             <TabsContent value="recommendations" className="space-y-6">
               <div className="grid lg:grid-cols-2 gap-6">
-                <Card className="border-green-200">
+                <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2">
                       <Target className="w-5 h-5 text-green-600" />
@@ -453,7 +453,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
                   </CardContent>
                 </Card>
 
-                <Card className="border-orange-200">
+                <Card className="glass-card border-orange-200 dark:border-orange-800/50">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2">
                       <Users className="w-5 h-5 text-orange-600" />
@@ -478,7 +478,7 @@ export function MarketTrends({ onBack }: MarketTrendsProps) {
                 </Card>
               </div>
 
-              <Card className="border-blue-200">
+              <Card className="glass-card border-blue-200 dark:border-blue-800/50">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <DollarSign className="w-5 h-5 text-blue-600" />

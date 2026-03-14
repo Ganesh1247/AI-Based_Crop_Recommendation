@@ -264,25 +264,25 @@ export function CropPredict({ onBack }: CropPredictProps) {
   };
 
   return (
-    <div className="min-h-screen bg-green-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       {/* Header */}
-      <header className="bg-green-50 border-b border-green-200">
+      <header className="glass-panel sticky top-0 z-50 border-b-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Button
               variant="ghost"
               onClick={onBack}
-              className="text-gray-800 hover:text-green-600"
+              className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Home
             </Button>
             
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" />
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-xl shadow-lg flex items-center justify-center">
+                <Leaf className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-semibold text-gray-800">CropPredict</span>
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 to-teal-600 dark:from-emerald-400 dark:to-teal-300">CropPredict</span>
             </div>
           </div>
         </div>
@@ -292,10 +292,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
             Crop Yield Prediction
           </h1>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Get accurate crop yield predictions using AI or by entering soil parameters manually
           </p>
         </div>
@@ -328,7 +328,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                 </TabsList>
 
                 <TabsContent value="manual" className="space-y-6">
-                  <Card className="border-green-100">
+                  <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                     <CardHeader>
                       <CardTitle className="flex items-center space-x-2">
                         <Beaker className="w-5 h-5 text-green-600" />
@@ -435,7 +435,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
                 <TabsContent value="ai" className="space-y-6">
                   {/* Location Input */}
-                  <Card className="border-green-100">
+                  <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                     <CardHeader>
                       <CardTitle className="flex items-center space-x-2">
                         <MapPin className="w-5 h-5 text-green-600" />
@@ -498,7 +498,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
 
                   {/* Soil Data Display */}
                   {aiData.soilGridsData && (
-                    <Card className="border-green-100">
+                    <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                       <CardHeader>
                         <CardTitle className="flex items-center space-x-2">
                           <Satellite className="w-5 h-5 text-green-600" />
@@ -552,7 +552,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                   )}
 
                   {/* AI Prediction Button */}
-                  <Card className="border-green-100">
+                  <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                     <CardHeader>
                       <CardTitle className="flex items-center space-x-2">
                         <Brain className="w-5 h-5 text-green-600" />
@@ -595,7 +595,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                 <TabsContent value="npk" className="space-y-6">
                   {/* NPK Predictor (based on previous crop) */}
                   {true ? (
-                    <Card className="border-green-100">
+                    <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                       <CardHeader>
                         <CardTitle className="flex items-center space-x-2">
                           <Beaker className="w-5 h-5 text-green-600" />
@@ -608,10 +608,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
                           <div className="space-y-2">
                             <Label className="text-gray-800">Past Crop Type</Label>
                             <Select value={npkForm.pastCropType} onValueChange={(v) => handleNpkChange("pastCropType", v)}>
-                              <SelectTrigger className="border-green-200 focus:border-green-500">
+                              <SelectTrigger className="border-green-200 focus:border-green-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                 <SelectValue placeholder="Select crop" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                 {Object.keys((CROP_DATABASE as any)).map((c) => (
                                   <SelectItem key={c} value={c}>{c}</SelectItem>
                                 ))}
@@ -629,10 +629,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
                                 className="border-green-200 focus:border-green-500"
                               />
                               <Select value={npkForm.areaUnit} onValueChange={(v) => handleNpkChange("areaUnit", v)}>
-                                <SelectTrigger className="border-green-200 focus:border-green-500">
+                                <SelectTrigger className="border-green-200 focus:border-green-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                   <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                   <SelectItem value="m2">Square Meters (m²)</SelectItem>
                                   <SelectItem value="ha">Hectares (ha)</SelectItem>
                                 </SelectContent>
@@ -650,10 +650,10 @@ export function CropPredict({ onBack }: CropPredictProps) {
                                 className="border-green-200 focus:border-green-500"
                               />
                               <Select value={npkForm.yieldUnit} onValueChange={(v) => handleNpkChange("yieldUnit", v)}>
-                                <SelectTrigger className="border-green-200 focus:border-green-500">
+                                <SelectTrigger className="border-green-200 focus:border-green-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                   <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                                   <SelectItem value="kg_ha">Kg per Hectare (kg/ha)</SelectItem>
                                   <SelectItem value="t_ha">Tons per Hectare (t/ha)</SelectItem>
                                 </SelectContent>
@@ -730,7 +730,7 @@ export function CropPredict({ onBack }: CropPredictProps) {
                       </CardContent>
                     </Card>
                   ) : (
-                    <Card className="border-green-100">
+                    <Card className="glass-card border-slate-200/60 dark:border-slate-800/60 shadow-lg">
                       <CardHeader>
                         <CardTitle className="flex items-center space-x-2">
                           <Beaker className="w-5 h-5 text-green-600" />
@@ -774,26 +774,26 @@ export function CropPredict({ onBack }: CropPredictProps) {
                 </CardContent>
               </Card>
 
-              <Card className="border-green-100">
+              <Card className="glass-card border-slate-200 dark:border-slate-800">
                 <CardHeader>
-                  <CardTitle className="text-gray-800">Optimal Ranges</CardTitle>
+                  <CardTitle className="text-slate-900 dark:text-white">Optimal Ranges</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-800">Nitrogen (N):</span>
-                    <span className="font-medium text-gray-900">20-80 ppm</span>
+                    <span className="text-slate-800 dark:text-slate-300">Nitrogen (N):</span>
+                    <span className="font-medium text-slate-900 dark:text-white">20-80 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-800">Phosphorus (P):</span>
-                    <span className="font-medium text-gray-900">10-70 ppm</span>
+                    <span className="text-slate-800 dark:text-slate-300">Phosphorus (P):</span>
+                    <span className="font-medium text-slate-900 dark:text-white">10-70 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-800">Potassium (K):</span>
-                    <span className="font-medium text-gray-900">10-40 ppm</span>
+                    <span className="text-slate-800 dark:text-slate-300">Potassium (K):</span>
+                    <span className="font-medium text-slate-900 dark:text-white">10-40 ppm</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-800">pH Level:</span>
-                    <span className="font-medium text-gray-900">5.5-8.0</span>
+                    <span className="text-slate-800 dark:text-slate-300">pH Level:</span>
+                    <span className="font-medium text-slate-900 dark:text-white">5.5-8.0</span>
                   </div>
                 </CardContent>
               </Card>

@@ -4,6 +4,7 @@ interface User {
   id: string;
   name: string;
   phone: string;
+  username?: string;
   email?: string;
   location?: {
     city: string;
@@ -17,7 +18,8 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
-  login: (phone: string, name: string) => Promise<void>;
+  login: (phone: string, password?: string) => Promise<void>;
+  signup: (name: string, phone: string, username?: string, password?: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
   updateUser: (userData: Partial<User>) => void;
@@ -44,15 +46,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = useCallback(async (phone: string, name: string): Promise<void> => {
+  const login = useCallback(async (phone: string, password?: string): Promise<void> => {
     setIsLoading(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise(resolve => setTimeout(resolve, 800));
       
       const userData: User = {
         id: Math.random().toString(36).substr(2, 9),
-        name,
+        name: "Demo User", // In a real app, this comes from DB
         phone,
         signupDate: new Date().toISOString()
       };
@@ -61,6 +63,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('currentUser', JSON.stringify(userData));
     } catch (error) {
       throw new Error('Login failed');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const signup = useCallback(async (name: string, phone: string, username?: string, password?: string): Promise<void> => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      const userData: User = {
+        id: Math.random().toString(36).substr(2, 9),
+        name,
+        phone,
+        username,
+        signupDate: new Date().toISOString()
+      };
+      
+      setUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+    } catch (error) {
+      throw new Error('Signup failed');
     } finally {
       setIsLoading(false);
     }
@@ -82,10 +107,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const contextValue = useMemo(() => ({
     user,
     login,
+    signup,
     logout,
     isLoading,
     updateUser
-  }), [user, login, logout, isLoading, updateUser]);
+  }), [user, login, signup, logout, isLoading, updateUser]);
 
   return (
     <AuthContext.Provider value={contextValue}>

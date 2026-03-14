@@ -201,10 +201,10 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
       {/* Header */}
       {onBack && (
-        <header className="bg-white border-b border-green-100">
+        <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-slate-800 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Button
@@ -228,10 +228,10 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             {t('features.soil.title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             {t('features.soil.desc')}
           </p>
         </div>
@@ -247,7 +247,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
           <TabsContent value="test" className="space-y-6">
             <div className="grid lg:grid-cols-2 gap-6">
               {/* Location Input */}
-              <Card className="border-green-200">
+              <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <MapPin className="w-5 h-5 text-green-600" />
@@ -263,7 +263,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         placeholder="Enter your field location"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <Button className="w-full bg-green-600 hover:bg-green-700">
@@ -275,7 +275,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
               </Card>
 
               {/* Soil Parameters */}
-              <Card className="border-green-200">
+              <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <TestTube className="w-5 h-5 text-green-600" />
@@ -292,7 +292,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         step="0.1"
                         value={soilData.pH}
                         onChange={(e) => handleInputChange('pH', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -302,7 +302,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         type="number"
                         value={soilData.nitrogen}
                         onChange={(e) => handleInputChange('nitrogen', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -312,7 +312,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         type="number"
                         value={soilData.phosphorus}
                         onChange={(e) => handleInputChange('phosphorus', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -322,7 +322,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         type="number"
                         value={soilData.potassium}
                         onChange={(e) => handleInputChange('potassium', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -333,7 +333,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         step="0.1"
                         value={soilData.organicMatter}
                         onChange={(e) => handleInputChange('organicMatter', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -343,7 +343,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                         type="number"
                         value={soilData.moisture}
                         onChange={(e) => handleInputChange('moisture', e.target.value)}
-                        className="border-green-200 focus:border-green-500"
+                        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-emerald-200 dark:border-emerald-800 focus:border-emerald-500"
                       />
                     </div>
                   </div>
@@ -377,7 +377,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
             {analysisResult && (
               <div className="grid lg:grid-cols-2 gap-6">
                 {/* Overall Score */}
-                <Card className="border-green-200">
+                <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                   <CardHeader className="text-center">
                     <CardTitle>Soil Health Score</CardTitle>
                     <CardDescription>Overall assessment of your soil condition</CardDescription>
@@ -399,7 +399,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                 </Card>
 
                 {/* Nutrient Analysis */}
-                <Card className="border-green-200">
+                <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                   <CardHeader>
                     <CardTitle>Nutrient Analysis</CardTitle>
                     <CardDescription>Detailed breakdown of soil nutrients</CardDescription>
@@ -433,7 +433,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
                 </Card>
 
                 {/* Suitable Crops */}
-                <Card className="border-green-200 lg:col-span-2">
+                <Card className="glass-card border-emerald-200 dark:border-emerald-800/50 lg:col-span-2">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2">
                       <Leaf className="w-5 h-5 text-green-600" />
@@ -459,7 +459,7 @@ export function SoilAnalysis({ onBack }: SoilAnalysisProps) {
           <TabsContent value="recommendations" className="space-y-6">
             {analysisResult && (
               <div className="grid gap-6">
-                <Card className="border-green-200">
+                <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
                   <CardHeader>
                     <CardTitle>Improvement Recommendations</CardTitle>
                     <CardDescription>Actionable steps to improve your soil health</CardDescription>

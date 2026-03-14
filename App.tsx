@@ -125,10 +125,18 @@ function AppContent() {
                 onSignUpClick={navigateToSignUp}
                 onProfileClick={navigateToProfile}
                 onFeaturesClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                onWeatherClick={navigateToWeather}
+                onMarketClick={navigateToMarket}
+                onSoilClick={navigateToSoil}
+                onVoiceClick={navigateToVoice}
               />
               <Hero 
                 onPredictClick={navigateToPredict}
                 onDiseaseClick={navigateToDisease}
+                onSignUpClick={navigateToSignUp}
+                onWeatherClick={navigateToWeather}
+                onMarketClick={navigateToMarket}
+                onSoilClick={navigateToSoil}
               />
             </div>
             <div id="features">
@@ -140,6 +148,7 @@ function AppContent() {
                 onChatClick={navigateToChat}
                 onDiseaseClick={navigateToDisease}
                 onVoiceClick={navigateToVoice}
+                onSignUpClick={navigateToSignUp}
               />
             </div>
             <Footer />

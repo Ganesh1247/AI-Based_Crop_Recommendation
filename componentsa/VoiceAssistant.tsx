@@ -386,9 +386,9 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
   }, [messages]);
 
   return (
-    <div className="min-h-screen bg-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
       {/* Header */}
-      <div className="bg-green-50 shadow-sm border-b border-green-200">
+      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm border-b border-emerald-200 dark:border-slate-800 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -402,10 +402,10 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                 {t('common.back')}
               </Button>
               <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-green-600" />
+                <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <span className="text-xl font-semibold text-gray-800">{t('voice.title')}</span>
+                <span className="text-xl font-semibold text-slate-900 dark:text-white">{t('voice.title')}</span>
               </div>
             </div>
             
@@ -444,13 +444,13 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Mic className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Mic className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             {t('voice.title')}
           </h1>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             {t('voice.subtitle')}
           </p>
         </div>
@@ -458,7 +458,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Voice Controls */}
           <div className="lg:col-span-1">
-            <Card>
+            <Card className="glass-card border-emerald-200 dark:border-emerald-800/50">
               <CardHeader>
                 <CardTitle>{t('voice.title')}</CardTitle>
                 <CardDescription className="text-gray-700">
@@ -532,7 +532,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
 
           {/* Conversation */}
           <div className="lg:col-span-2">
-            <Card className="h-[600px] flex flex-col">
+            <Card className="h-[600px] flex flex-col glass-card border-emerald-200 dark:border-emerald-800/50">
               <CardHeader>
                 <CardTitle>{t('voice.conversation')}</CardTitle>
               </CardHeader>
@@ -570,7 +570,7 @@ export function VoiceAssistant({ onBack }: VoiceAssistantProps) {
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     placeholder={t('voice.placeholder')}
-                    className="flex-1"
+                    className="flex-1 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                   />
                   <Button type="submit" size="sm">
                     <Send className="w-4 h-4" />

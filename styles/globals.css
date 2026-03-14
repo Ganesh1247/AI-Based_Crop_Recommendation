@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,28 +6,28 @@
 /* Dark variant helper for older Tailwind setups can be replaced by class on html/body */
 
 :root {
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-size: 16px;
-  --background: #f0fdf4;
+  --background: #f8fafc;
   --foreground: #1f2937;
   --card: #f0fdf4;
   --card-foreground: #1f2937;
   --popover: #f0fdf4;
   --popover-foreground: #1f2937;
-  --primary: #059669;
+  --primary: #047857;
   --primary-foreground: #ffffff;
-  --secondary: #dcfce7;
-  --secondary-foreground: #1f2937;
-  --muted: #f0fdf4;
-  --muted-foreground: #6b7280;
-  --accent: #ecfdf5;
-  --accent-foreground: #047857;
-  --destructive: #dc2626;
+  --secondary: #d1fae5;
+  --secondary-foreground: #064e3b;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #10b981;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #bbf7d0;
+  --border: #e2e8f0;
   --input: transparent;
-  --input-background: #f0fdf4;
-  --switch-background: #e5e7eb;
+  --input-background: #ffffff;
+  --switch-background: #cbd5e1;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #059669;
@@ -140,6 +140,26 @@
     font-family: var(--font-family);
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500;
+  }
+  
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur border border-white/50 shadow-glass transition-all duration-300;
+  }
+  
+  .dark .glass-panel, .dark .glass-card {
+    @apply bg-slate-900/70 border-white/10 shadow-black/20;
   }
 }
 

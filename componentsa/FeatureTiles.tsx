@@ -21,9 +21,10 @@ interface FeatureTilesProps {
   onChatClick?: () => void;
   onDiseaseClick?: () => void;
   onVoiceClick?: () => void;
+  onSignUpClick?: () => void;
 }
 
-export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMarketClick, onChatClick, onDiseaseClick, onVoiceClick }: FeatureTilesProps) {
+export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMarketClick, onChatClick, onDiseaseClick, onVoiceClick, onSignUpClick }: FeatureTilesProps) {
   const { t } = useLanguage();
   
   const features = [
@@ -75,58 +76,58 @@ export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMa
   ];
 
   return (
-    <section id="features" className="py-20 bg-white">
+    <section id="features" className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Special Features - Highlighted Cards */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
               {t('features.coreTitle')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto font-light leading-relaxed">
               {t('features.coreSubtitle')}
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Predict Now - Special Card */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-transparent"></div>
+            <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-10 text-white shadow-xl hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 transform hover:-translate-y-2 border border-emerald-400/30">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent mix-blend-overlay"></div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Brain className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-inner">
+                  <Brain className="w-10 h-10 text-white drop-shadow-md" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{t('features.cropPrediction')}</h3>
-                <p className="text-green-50 mb-6 leading-relaxed">
+                <h3 className="text-3xl font-extrabold mb-4 tracking-tight">{t('features.cropPrediction')}</h3>
+                <p className="text-emerald-50 mb-8 leading-relaxed text-lg font-light">
                   {t('features.cropPredictionDesc')}
                 </p>
                 <Button 
                   onClick={onPredictClick}
-                  className="bg-white text-green-600 hover:bg-green-50 font-semibold px-6 py-3 rounded-xl"
+                  className="bg-white text-emerald-700 hover:bg-slate-50 font-bold px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
                 >
                   {t('hero.predictNow')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </div>
             
             {/* Detect Disease - Special Card */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-transparent"></div>
+            <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-10 text-white shadow-xl hover:shadow-2xl hover:shadow-indigo-500/20 transition-all duration-500 transform hover:-translate-y-2 border border-indigo-400/30">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent mix-blend-overlay"></div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Scan className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 shadow-inner">
+                  <Scan className="w-10 h-10 text-white drop-shadow-md" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{t('features.diseaseDetection')}</h3>
-                <p className="text-purple-50 mb-6 leading-relaxed">
+                <h3 className="text-3xl font-extrabold mb-4 tracking-tight">{t('features.diseaseDetection')}</h3>
+                <p className="text-indigo-50 mb-8 leading-relaxed text-lg font-light">
                   {t('features.diseaseDetectionDesc')}
                 </p>
                 <Button 
                   onClick={onDiseaseClick}
-                  className="bg-white text-purple-600 hover:bg-purple-50 font-semibold px-6 py-3 rounded-xl"
+                  className="bg-white text-indigo-700 hover:bg-slate-50 font-bold px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
                 >
                   {t('hero.detectDisease')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </div>
@@ -134,11 +135,11 @@ export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMa
         </div>
 
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16 mt-32">
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
             {t('features.additionalTitle')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto font-light">
             {t('features.additionalSubtitle')}
           </p>
         </div>
@@ -150,24 +151,23 @@ export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMa
             return (
               <Card 
                 key={index} 
-                className="group hover:shadow-lg transition-all duration-300 border-green-100 hover:border-green-200"
+                className="group glass-card border-slate-200/60 dark:border-slate-800/60 hover:-translate-y-1 hover:shadow-xl dark:shadow-none transition-all duration-300 bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg"
               >
                 <CardHeader className="pb-4">
-                  <div className={`w-12 h-12 ${feature.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white" />
+                  <div className={`w-14 h-14 ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-md`}>
+                    <IconComponent className="w-7 h-7 text-white drop-shadow-sm" />
                   </div>
-                  <CardTitle className="text-lg font-semibold text-gray-900">
+                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <CardDescription className="text-gray-600 mb-4 leading-relaxed">
+                  <CardDescription className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed text-base font-light">
                     {feature.description}
                   </CardDescription>
                   <Button 
                     variant="outline" 
-                    size="sm"
-                    className="w-full border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300"
+                    className="w-full border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group-hover:bg-slate-50 dark:group-hover:bg-slate-800 font-medium"
                     onClick={feature.onClick}
                   >
                     {t('features.accessFeature')}
@@ -179,20 +179,23 @@ export function FeatureTiles({ onPredictClick, onWeatherClick, onSoilClick, onMa
         </div>
 
         {/* CTA Section */}
-        <div className="mt-20 text-center bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl p-8 lg:p-12 shadow-2xl">
-          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-            {t('features.transformTitle')}
-          </h3>
-          <p className="text-green-100 mb-8 text-lg max-w-2xl mx-auto">
-            {t('features.transformSubtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-green-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-xl">
-              {t('features.getStarted')}
-            </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl">
-              {t('features.watchDemo')}
-            </Button>
+        <div className="mt-32 text-center bg-gradient-to-r from-emerald-600 to-teal-500 rounded-[2.5rem] p-10 lg:p-16 shadow-2xl shadow-emerald-500/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+          <div className="relative z-10">
+            <h3 className="text-3xl lg:text-5xl font-black text-white mb-6 tracking-tight">
+              {t('features.transformTitle')}
+            </h3>
+            <p className="text-emerald-50 mb-10 text-xl max-w-2xl mx-auto font-light leading-relaxed opacity-90">
+              {t('features.transformSubtitle')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+              <Button size="lg" className="bg-white text-emerald-700 hover:bg-slate-50 font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 text-lg" onClick={onSignUpClick}>
+                {t('features.getStarted')}
+              </Button>
+              <Button size="lg" variant="outline" className="border-2 border-white/80 text-white hover:bg-white/10 backdrop-blur-sm font-bold px-10 py-7 rounded-full transition-all duration-300 text-lg">
+                {t('features.watchDemo')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

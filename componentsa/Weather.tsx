@@ -147,24 +147,24 @@ export function Weather({ onBack }: WeatherProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
       {/* Header */}
       {onBack && (
-        <header className="bg-white border-b border-blue-100">
+        <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-slate-800 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Button
                 variant="ghost"
                 onClick={onBack}
-                className="text-gray-600 hover:text-blue-600"
+                className="text-gray-600 hover:text-emerald-600"
               >
                 <MapPin className="w-5 h-5 mr-2" />
                 {t('common.back')}
               </Button>
               
               <div className="flex items-center space-x-2">
-                <Cloud className="w-8 h-8 text-blue-600" />
-                <span className="text-xl font-semibold text-gray-900">{t('weather.title')}</span>
+                <Cloud className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-xl font-semibold text-slate-900 dark:text-white">{t('weather.title') === 'weather.title' ? 'Weather Analysis' : t('weather.title')}</span>
               </div>
             </div>
           </div>
@@ -174,27 +174,27 @@ export function Weather({ onBack }: WeatherProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            {t('weather.title')}
+          <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            {t('weather.title') === 'weather.title' ? 'Weather Analysis' : t('weather.title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('weather.subtitle')}
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            {t('weather.subtitle') === 'weather.subtitle' ? 'Real-time weather data and forecasts for your farm' : t('weather.subtitle')}
           </p>
         </div>
 
         {/* Location Permission Notice */}
         <div className="mb-6 max-w-2xl mx-auto">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div className="flex items-center space-x-2 text-blue-700 mb-3">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div className="flex items-center space-x-2 text-emerald-700 mb-3">
               <MapPin className="w-5 h-5" />
-              <span className="font-medium">{t('weather.locationAccess')}</span>
+              <span className="font-medium">{t('weather.locationAccess') === 'weather.locationAccess' ? 'Location Access' : t('weather.locationAccess')}</span>
             </div>
-            <p className="text-blue-600 text-sm mb-3">
-              {t('weather.locationNotice')}
+            <p className="text-emerald-600 text-sm mb-3">
+              {t('weather.locationNotice') === 'weather.locationNotice' ? 'We need your location to provide accurate local weather data.' : t('weather.locationNotice')}
             </p>
             <Button
               onClick={loadCurrentLocationWeather}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
               disabled={isLoading}
             >
               <MapPin className="w-4 h-4 mr-2" />
@@ -207,18 +207,18 @@ export function Weather({ onBack }: WeatherProps) {
         <div className="mb-8 max-w-md mx-auto">
           <div className="flex gap-3">
             <Input
-              placeholder={t('weather.searchCity')}
+              placeholder={t('weather.searchCity') === 'weather.searchCity' ? 'Search city...' : t('weather.searchCity')}
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleCitySearch()}
-              className="border-blue-200 focus:border-blue-500"
+              className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-white"
             />
             <Button
               onClick={handleCitySearch}
               disabled={isLoading || !cityInput.trim()}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
             >
-              {t('weather.search')}
+              {t('weather.search') === 'weather.search' ? 'Search' : t('weather.search')}
             </Button>
           </div>
         </div>
@@ -234,8 +234,8 @@ export function Weather({ onBack }: WeatherProps) {
         {isLoading && (
           <div className="text-center py-12">
             <div className="inline-flex items-center space-x-2">
-              <RefreshCw className="w-6 h-6 animate-spin text-blue-600" />
-              <span className="text-gray-600">{t('weather.loadingWeather')}</span>
+              <RefreshCw className="w-6 h-6 animate-spin text-emerald-600" />
+              <span className="text-gray-600">{t('weather.loadingWeather') === 'weather.loadingWeather' ? 'Loading weather data...' : t('weather.loadingWeather')}</span>
             </div>
           </div>
         )}
@@ -244,23 +244,23 @@ export function Weather({ onBack }: WeatherProps) {
         {weatherData && !isLoading && (
           <div className="space-y-8">
             {/* Current Weather */}
-            <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-sky-50">
+            <Card className="border-emerald-200 dark:border-emerald-800 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-slate-800 dark:to-slate-800/80">
               <CardHeader className="text-center">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-2xl text-blue-800">
-                    {t('weather.current')}
+                  <CardTitle className="text-2xl text-emerald-800">
+                    {t('weather.current') === 'weather.current' ? 'Current Weather' : t('weather.current')}
                   </CardTitle>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={handleRefresh}
-                    className="border-blue-200 text-blue-700 hover:bg-blue-50"
+                    className="border-emerald-200 text-emerald-700 hover:bg-emerald-50"
                   >
                     <RefreshCw className="w-4 h-4 mr-2" />
                     Refresh
                   </Button>
                 </div>
-                <CardDescription className="flex items-center justify-center space-x-2 text-blue-600">
+                <CardDescription className="flex items-center justify-center space-x-2 text-emerald-600">
                   <MapPin className="w-4 h-4" />
                   <span>{weatherData.location}</span>
                 </CardDescription>
@@ -270,14 +270,14 @@ export function Weather({ onBack }: WeatherProps) {
                   {/* Main Weather Info */}
                   <div className="text-center">
                     <div className="text-6xl mb-4">{weatherData.current.icon}</div>
-                    <div className="text-5xl font-bold text-blue-800 mb-2">
+                    <div className="text-5xl font-bold text-emerald-800 mb-2">
                       {weatherData.current.temperature}°C
                     </div>
-                    <p className="text-xl text-blue-600 capitalize mb-4">
+                    <p className="text-xl text-emerald-600 capitalize mb-4">
                       {weatherData.current.condition}
                     </p>
                     {lastUpdated && (
-                      <p className="text-sm text-blue-500">
+                      <p className="text-sm text-emerald-500">
                         Last updated: {lastUpdated.toLocaleTimeString()}
                       </p>
                     )}
@@ -285,34 +285,34 @@ export function Weather({ onBack }: WeatherProps) {
 
                   {/* Weather Details */}
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white rounded-lg p-4 border border-blue-100">
-                      <div className="flex items-center space-x-2 text-blue-600 mb-2">
+                    <div className="bg-white dark:bg-slate-900/50 rounded-lg p-4 border border-emerald-100 dark:border-emerald-900/50">
+                      <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 mb-2">
                         <Droplets className="w-5 h-5" />
-                        <span className="font-medium">{t('weather.humidity')}</span>
+                        <span className="font-medium">{t('weather.humidity') === 'weather.humidity' ? 'Humidity' : t('weather.humidity')}</span>
                       </div>
                       <p className="text-2xl font-bold text-gray-800">{weatherData.current.humidity}%</p>
                     </div>
                     
-                    <div className="bg-white rounded-lg p-4 border border-blue-100">
-                      <div className="flex items-center space-x-2 text-blue-600 mb-2">
+                    <div className="bg-white dark:bg-slate-900/50 rounded-lg p-4 border border-emerald-100 dark:border-emerald-900/50">
+                      <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 mb-2">
                         <Wind className="w-5 h-5" />
-                        <span className="font-medium">{t('weather.windSpeed')}</span>
+                        <span className="font-medium">{t('weather.windSpeed') === 'weather.windSpeed' ? 'Wind Speed' : t('weather.windSpeed')}</span>
                       </div>
                       <p className="text-2xl font-bold text-gray-800">{weatherData.current.windSpeed} km/h</p>
                     </div>
                     
-                    <div className="bg-white rounded-lg p-4 border border-blue-100">
-                      <div className="flex items-center space-x-2 text-blue-600 mb-2">
+                    <div className="bg-white rounded-lg p-4 border border-emerald-100">
+                      <div className="flex items-center space-x-2 text-emerald-600 mb-2">
                         <Gauge className="w-5 h-5" />
-                        <span className="font-medium">{t('weather.pressure')}</span>
+                        <span className="font-medium">{t('weather.pressure') === 'weather.pressure' ? 'Pressure' : t('weather.pressure')}</span>
                       </div>
                       <p className="text-2xl font-bold text-gray-800">{weatherData.current.pressure} hPa</p>
                     </div>
                     
-                    <div className="bg-white rounded-lg p-4 border border-blue-100">
-                      <div className="flex items-center space-x-2 text-blue-600 mb-2">
+                    <div className="bg-white rounded-lg p-4 border border-emerald-100">
+                      <div className="flex items-center space-x-2 text-emerald-600 mb-2">
                         <Eye className="w-5 h-5" />
-                        <span className="font-medium">{t('weather.visibility')}</span>
+                        <span className="font-medium">{t('weather.visibility') === 'weather.visibility' ? 'Visibility' : t('weather.visibility')}</span>
                       </div>
                       <p className="text-2xl font-bold text-gray-800">{weatherData.current.visibility} km</p>
                     </div>
@@ -322,9 +322,9 @@ export function Weather({ onBack }: WeatherProps) {
             </Card>
 
             {/* 5-Day Forecast */}
-            <Card className="border-blue-200">
+            <Card className="border-emerald-200 dark:border-emerald-800 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-blue-800">
+                <CardTitle className="flex items-center space-x-2 text-emerald-800">
                   <Calendar className="w-6 h-6" />
                   <span>5-Day Forecast</span>
                 </CardTitle>
@@ -333,15 +333,15 @@ export function Weather({ onBack }: WeatherProps) {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                   {weatherData.forecast.map((day, index) => (
-                    <div key={index} className="bg-blue-50 rounded-lg p-4 text-center border border-blue-100">
-                      <div className="font-medium text-blue-800 mb-2">
+                    <div key={index} className="bg-emerald-50 rounded-lg p-4 text-center border border-emerald-100">
+                      <div className="font-medium text-emerald-800 mb-2">
                         {index === 0 ? 'Today' : day.day}
                       </div>
                       <div className="text-3xl mb-2">{day.icon}</div>
                       <div className="text-sm font-medium text-gray-800 mb-2">
                         {day.high}° / {day.low}°
                       </div>
-                      <p className="text-xs text-blue-600 capitalize mb-3">
+                      <p className="text-xs text-emerald-600 capitalize mb-3">
                         {day.condition}
                       </p>
                       <div className="space-y-1 text-xs text-gray-600">
@@ -361,9 +361,9 @@ export function Weather({ onBack }: WeatherProps) {
             </Card>
 
             {/* Monthly Forecast */}
-            <Card className="border-blue-200">
+            <Card className="border-emerald-200 dark:border-emerald-800 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-blue-800">
+                <CardTitle className="flex items-center space-x-2 text-emerald-800">
                   <Calendar className="w-6 h-6" />
                   <span>30-Day Monthly Forecast</span>
                 </CardTitle>
@@ -372,8 +372,8 @@ export function Weather({ onBack }: WeatherProps) {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-10 gap-3 max-h-96 overflow-y-auto">
                   {weatherData.monthly.map((day, index) => (
-                    <div key={index} className="bg-blue-50 rounded-lg p-3 text-center border border-blue-100 hover:bg-blue-100 transition-colors">
-                      <div className="font-medium text-blue-800 mb-1 text-xs">
+                    <div key={index} className="bg-emerald-50 rounded-lg p-3 text-center border border-emerald-100 hover:bg-emerald-100 transition-colors">
+                      <div className="font-medium text-emerald-800 mb-1 text-xs">
                         {new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </div>
                       <div className="text-xl mb-1">{day.icon}</div>
@@ -410,7 +410,7 @@ export function Weather({ onBack }: WeatherProps) {
                         </Badge>
                       )}
                       {weatherData.current.humidity > 80 && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        <Badge variant="secondary" className="bg-emerald-100 text-emerald-800">
                           💧 High humidity - Monitor for fungal diseases
                         </Badge>
                       )}
@@ -420,7 +420,7 @@ export function Weather({ onBack }: WeatherProps) {
                         </Badge>
                       )}
                       {weatherData.current.temperature < 15 && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        <Badge variant="secondary" className="bg-emerald-100 text-emerald-800">
                           ❄️ Cool weather - Consider frost protection
                         </Badge>
                       )}
@@ -431,7 +431,7 @@ export function Weather({ onBack }: WeatherProps) {
                     <h4 className="font-medium text-green-800 mb-3">Upcoming Weather</h4>
                     <div className="space-y-2">
                       {weatherData.forecast.some(day => day.precipitation > 5) && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        <Badge variant="secondary" className="bg-emerald-100 text-emerald-800">
                           🌧️ Rain expected - Adjust irrigation schedule
                         </Badge>
                       )}
